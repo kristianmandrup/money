@@ -184,15 +184,6 @@ class Money
         end
 
       if symbol_value && !symbol_value.empty?
-        formatted = if symbol_position == :before 
-          "#{symbol_value}#{formatted}"
-        else
-          symbol_space = rules[:symbol_after_without_space] ? "" : " "
-          "#{formatted}#{symbol_space}#{symbol_value}"
-        end
-      end
-
-      if symbol_value && !symbol_value.empty?
         symbol_separator = rules[:symbol_separator].nil? ? "" : rules[:symbol_separator]
         formatted = if symbol_position == :before 
           "#{symbol_value}#{symbol_separator}#{formatted}"
