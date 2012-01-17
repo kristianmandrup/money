@@ -192,6 +192,17 @@ class Money
         end
       end
 
+      if symbol_value && !symbol_value.empty?
+        symbol_separator = rules[:symbol_separator].nil? ? "" : rules[:symbol_separator]
+        formatted = if symbol_position == :before 
+          "#{symbol_value}#{symbol_separator}#{formatted}"
+        else
+          symbol_space = rules[:symbol_after_without_space] ? "" : " "
+          symbol_separator = rules[:symbol_separator].nil? ? symbol_space : rules[:symbol_separator]
+          "#{formatted}#{symbol_separator}#{symbol_value}"
+        end
+      end
+
       if rules.has_key?(:decimal_mark) and rules[:decimal_mark] and
         rules[:decimal_mark] != decimal_mark
         formatted.sub!(decimal_mark, rules[:decimal_mark])
