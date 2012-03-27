@@ -488,6 +488,7 @@
     "subunit": "Øre",
     "subunit_to_unit": 100,
     "symbol_first": false,
+    "symbol_separator": " ", 
     "html_entity": "",
     "decimal_mark": ",",
     "thousands_separator": ".",
