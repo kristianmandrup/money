@@ -5,6 +5,7 @@
 - Engine now supports multiple ORMs and adds monetizable to each Model base module/class if present
 - Railtie converted to Engine
 - merged with alup monetizable branch with Railtie and Monetizable
+- needs Rails specs to test integration for each ORM supported!
 
 ## 5.0.0
 - Money::Currency::TABLE removed. Use Money::Currency.register to add
