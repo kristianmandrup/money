@@ -485,7 +485,7 @@
     "iso_code": "DKK",
     "name": "Danish Krone",
     "symbol": "kr",
-    "subunit": "Øre",
+    "subunit": "øre",
     "subunit_to_unit": 100,
     "symbol_first": false,
     "symbol_separator": " ", 
