@@ -30,6 +30,13 @@ class Money
         new(id) if self.table[id]
       end
 
+      # return true|false as to whether currency code exists
+      def exist?(id)
+        id = id.to_s.downcase.to_sym
+        !self.table[id].nil?
+      end
+
+
       # Wraps the object in a +Currency+ unless it's already a +Currency+
       # object.
       #
