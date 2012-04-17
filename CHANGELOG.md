@@ -1,5 +1,11 @@
 # Changelog
 
+## 5.1.2
+
+Add the concepts of Exchanges. An Exchange is a service that can exchange one currency into another. An Echange can use or more banks or possibly even do its service some other way.
+
+(TODO: specs)
+
 ## 5.1.1
 
 Added Money#use_bank and Money#bank_class helpers to setup bank used for exchange rates.

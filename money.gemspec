@@ -1,10 +1,10 @@
 # -*- encoding: utf-8 -*-
 Gem::Specification.new do |s|
   s.name        = "money"
-  s.version     = "5.1.1"
+  s.version     = "5.2.0"
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Tobias Luetke", "Hongli Lai", "Jeremy McNevin",
-                   "Shane Emmons", "Simone Carletti"]
+                   "Shane Emmons", "Simone Carletti", "Kristian Mandrup"]
   s.email       = ["semmons99+RubyMoney@gmail.com"]
   s.homepage    = "https://github.com/RubyMoney/money"
   s.summary     = "Money and currency exchange support library."

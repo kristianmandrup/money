@@ -34,7 +34,7 @@ class Money
     # +Bank::VariableExchange.+ It allows one to specify custom exchange rates.
     #
     # @return [Money::Bank::*]
-    attr_accessor :default_bank
+    attr_accessor :default_bank, :default_exchange
 
     # The default currency, which is used when +Money.new+ is called without an
     # explicit currency argument. The default value is Currency.new("USD"). The
@@ -200,10 +200,11 @@ class Money
   #
   # @see Money.new_with_dollars
   #
-  def initialize(cents, currency = Money.default_currency, bank = Money.default_bank)
+  def initialize(cents, currency = Money.default_currency, bank = Money.default_bank, exchange = Money.default_exchange)
     @cents = cents.round.to_i
     @currency = Currency.wrap(currency)
     @bank = bank
+    @exchange = exchange || Money::Exchange::SingleBank.new(bank)
   end
 
   # Returns the value of the money in dollars,
@@ -335,7 +336,17 @@ class Money
   #   Money.new(2000, "USD").exchange_to(Currency.new("EUR"))
   def exchange_to(other_currency)
     other_currency = Currency.wrap(other_currency)
-    @bank.exchange_with(self, other_currency)
+    exchanger.exchange_with(self, other_currency)
+  end
+
+  def exchange
+    @exchange || @bank
+  end
+
+  # Exchanger must be able to #exchange_with a currency
+  def exchange= exchange
+    raise ArgumentException, "Not a valid Exchange #{exchange}" unless exchange.respond_to(:exchange_with)
+    @exchange = exchange
   end
 
   # Receive a money object with the same amount as the current Money object

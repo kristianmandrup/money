@@ -254,6 +254,29 @@ implementations.
 - [money-open-exchange-rates](https://github.com/spk/money-open-exchange-rates)
 - [money-historical-bank](https://github.com/coutud/money-historical-bank)
 
+## Exchanges
+
+Optionally Money can be set up to use an Exchange to perform the currency exchange. Currently a `SingleBank` and a `MultiBank` exchange are provided.
+
+```ruby
+Money.default_exchange = Money::Exchange::MultiBank.new primary_bank, secondary_bank
+```
+
+The multi-bank exchange is useful if you want to provide fall-back exchange services in case one of the services is down.
+
+By default a `Money::Exchange::SingleBank` exchange (which uses the default bank) will be used if no exchange is explicitly set.
+
+```ruby
+# use default exchange wrapping the bank
+money = Money.new 100, "EUR", primary_bank
+
+# define custom exchange and use it
+my_exchange = Money::Exchange::MultiBank.new my_bank
+money = Money.new 100, "EUR", primary_bank, my_exchange
+
+# change the exchange used
+money.exchange = Money::Exchange::MultiBank.new primary_bank, secondary_bank
+```
 
 ## Ruby on Rails
 
