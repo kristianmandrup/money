@@ -1,5 +1,6 @@
 # encoding: utf-8
 require 'money/bank/variable_exchange'
+require 'money/exchange'
 require 'money/money/arithmetic'
 require 'money/money/parsing'
 require 'money/money/formatting'
@@ -336,7 +337,7 @@ class Money
   #   Money.new(2000, "USD").exchange_to(Currency.new("EUR"))
   def exchange_to(other_currency)
     other_currency = Currency.wrap(other_currency)
-    exchanger.exchange_with(self, other_currency)
+    exchange.exchange_with(self, other_currency)
   end
 
   def exchange

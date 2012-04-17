@@ -1,4 +1,6 @@
-module Money
+require 'money/exchange/base'
+
+class Money
 	module Exchange
 		class SingleBank < Base
 			def initialize bank
@@ -23,7 +25,11 @@ module Money
       #
       # @return [Money]
       def exchange_with(from, to_currency, &block)
-        bank.exchange_with(from, to_currency, &block)
+        return bank.exchange_with(from, to_currency, &block)
+      rescue Money::Bank::UnknownRate => e
+        raise e
+      rescue
+        service_error!
       end		
    	end
 	end

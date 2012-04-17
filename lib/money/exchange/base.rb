@@ -1,14 +1,22 @@
-module Money
+class Money
 	module Exchange
+    class ServiceError < StandardError
+    end
+
 		class Base
-	    class ExchangeError < StandardError
-	    end
 
 			attr_reader :bank
 
 			def initialize bank				
 				@bank = bank if valid_bank? bank
 			end
+
+      def squelch(exception_to_ignore = StandardError, default_value = nil)
+        yield
+      rescue Exception => e
+        raise unless e.is_a?(exception_to_ignore)
+        default_value
+      end
 
       # Exchanges the given +Money+ object to a new +Money+ object in
       # +to_currency+.
@@ -33,6 +41,10 @@ module Money
       end			
 
       protected
+
+      def service_error!
+        raise Money::Exchange::ServiceError, "Sorry! No bank could make the exchange: #{self}"
+      end
 
       def valid_bank? bank
       	raise ArgumentError, "Not a valid bank: #{bank}" unless bank.kind_of?(Money::Bank::Base)

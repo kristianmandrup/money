@@ -1,4 +1,6 @@
-module Money
+require 'money/exchange/base'
+
+class Money
 	module Exchange
 		class MultiBank < Base
       attr_reader :alternatives
@@ -26,11 +28,11 @@ module Money
       #
       # @return [Money]
       def exchange_with(from, to_currency, &block)
-        bank.exchange_with(from, to_currency, &block)
-      rescue UnknownRate => e 
+        return bank.exchange_with(from, to_currency, &block)
+      rescue Money::Bank::UnknownRate => e 
         raise e
       rescue
-        try_alternative_banks if alternatives      
+        try_alternative_banks(from, to_currency, &block) if alternatives      
       end
 
       protected
@@ -40,13 +42,12 @@ module Money
         @alternatives = alternatives
       end
 
-      def try_alternative_banks
+      def try_alternative_banks(from, to_currency, &block)
         alternatives.each do |bank|
-          return bank.exchange_with(from, to_currency, &block)
-          rescue
-            # try again
+          squelch { @result ||= bank.exchange_with(from, to_currency) }
         end
-        raise ExchangeError, "Sorry! No bank could make the exchange: #{self}"
+        return @result if @result
+        service_error!
       end
    	end
 	end

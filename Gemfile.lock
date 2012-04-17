@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    money (4.0.2)
+    money (5.2.0)
       i18n (~> 0.4)
       json
 
