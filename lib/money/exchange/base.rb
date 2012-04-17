@@ -1,10 +1,9 @@
 class Money
-	module Exchange
+  module Exchange
     class ServiceError < StandardError
     end
 
 		class Base
-
 			attr_reader :bank
 
 			def initialize bank				

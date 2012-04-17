@@ -1,10 +1,15 @@
 # Changelog
 
-## 5.1.2
+## 5.2.0
 
-Add the concepts of Exchanges. An Exchange is a service that can exchange one currency into another. An Echange can use or more banks or possibly even do its service some other way.
+Added the concepts of Exchanges. An Exchange is a service that can exchange one currency into another. An Exchange can use or more banks or possibly even perform its service some other way.
 
-(TODO: specs)
+- Money#default_exchange
+- Money#initialize takes extra optional 'exchange' param
+- Money#Exchange namespace with two built-in exchanges
+   - SingleBank
+   - MultipleBanks
+- Specs done
 
 ## 5.1.1
 

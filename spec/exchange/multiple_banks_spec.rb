@@ -14,7 +14,7 @@ class FailBank < Money::Bank::VariableExchange
 	end
 end
 
-describe Money::Exchange::MultiBank do
+describe Money::Exchange::MultipleBanks do
 	let(:bank) 			{ Money::Bank::VariableExchange.instance }
 
 	before do
@@ -26,7 +26,7 @@ describe Money::Exchange::MultiBank do
   end
 
 	describe 'Simple setup' do
-		let(:exchange) 	{ Money::Exchange::MultiBank.new bank, bank }
+		let(:exchange) 	{ Money::Exchange::MultipleBanks.new bank, bank }
 
 		subject { exchange }
 
@@ -37,7 +37,7 @@ describe Money::Exchange::MultiBank do
 
 	describe 'Fallback to alternative' do
 		let(:fail_bank) 	{ FailBank.new }
-		let(:exchange) 		{ Money::Exchange::MultiBank.new fail_bank, bank }
+		let(:exchange) 		{ Money::Exchange::MultipleBanks.new fail_bank, bank }
 
 		subject { exchange }
 
@@ -49,7 +49,7 @@ describe Money::Exchange::MultiBank do
 	describe 'All banks fail' do
 		let(:fail_bank) 			{ FailBank.new }
 		let(:other_fail_bank) { FailBank.new }		
-		let(:exchange) 				{ Money::Exchange::MultiBank.new fail_bank, other_fail_bank }
+		let(:exchange) 				{ Money::Exchange::MultipleBanks.new fail_bank, other_fail_bank }
 
 		before do
 	    @money = Money.new(100_00, "USD")

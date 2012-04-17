@@ -256,13 +256,15 @@ implementations.
 
 ## Exchanges
 
-Optionally Money can be set up to use an Exchange to perform the currency exchange. Currently a `SingleBank` and a `MultiBank` exchange are provided.
+Optionally Money can be set up to use an Exchange to perform the currency exchange. Currently a `SingleBank` and a `MultipleBanks` exchange are provided. An Exchange class must implement the `#exchange_with(from, to_currency, &block)` method.
+
+You can assign a default exchange to be used:
 
 ```ruby
-Money.default_exchange = Money::Exchange::MultiBank.new primary_bank, secondary_bank
+Money.default_exchange = Money::Exchange::MultipleBanks.new primary_bank, secondary_bank
 ```
 
-The multi-bank exchange is useful if you want to provide fall-back exchange services in case one of the services is down.
+The multi-bank exchange is useful if you want to provide fall-back exchange services in case one (or more) of the exchange services fail.
 
 By default a `Money::Exchange::SingleBank` exchange (which uses the default bank) will be used if no exchange is explicitly set.
 
@@ -271,11 +273,14 @@ By default a `Money::Exchange::SingleBank` exchange (which uses the default bank
 money = Money.new 100, "EUR", primary_bank
 
 # define custom exchange and use it
-my_exchange = Money::Exchange::MultiBank.new my_bank
+my_exchange = Money::Exchange::MultipleBanks.new my_bank
 money = Money.new 100, "EUR", primary_bank, my_exchange
 
-# change the exchange used
-money.exchange = Money::Exchange::MultiBank.new primary_bank, secondary_bank
+# perform the currency exchange
+money.exchange_to("USD")
+
+# change the exchange being used
+money.exchange = Money::Exchange::MultipleBanks.new primary_bank, secondary_bank
 ```
 
 ## Ruby on Rails

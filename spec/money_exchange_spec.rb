@@ -20,7 +20,7 @@ describe Money do
   	let(:bank) 						{ Money::Bank::VariableExchange.instance }
   	let(:exchange) 				{ Money::Exchange::SingleBank.new bank }
   	let(:fail_bank) 			{ FailBank.new }
-  	let(:alt_exchange) 		{ Money::Exchange::MultiBank.new fail_bank, bank }
+  	let(:alt_exchange) 		{ Money::Exchange::MultipleBanks.new fail_bank, bank }
 		let(:fail_exchange) 	{ Money::Exchange::SingleBank.new fail_bank }
 
 		before do

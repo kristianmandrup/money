@@ -2,7 +2,7 @@ require 'money/exchange/base'
 
 class Money
 	module Exchange
-		class MultiBank < Base
+		class MultipleBanks < Base
       attr_reader :alternatives
 
 			def initialize bank, *alternatives
