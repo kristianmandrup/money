@@ -216,6 +216,32 @@ There is nothing stopping you from creating bank objects which scrapes
 Money.default_bank = ExchangeBankWhichScrapesXeDotCom.new
 ```
 
+### Configuring use of a bank
+
+Gemfile
+
+```
+gem 'money' # or 'money-rails'
+gem 'google_currency'
+```
+
+```ruby
+Money.use_bank :google_currency
+```
+
+Use other Currency services in a similar fashion if the bank follows the following conventions:
+
+* class name `Money::Bank::[name]`
+* require 'money/bank/[name]'
+
+You can also explicitly set the class name for the service if it doesn't follow the convention: 
+
+```ruby
+Money.use_bank :forex, Forex::CurrencyService
+```
+
+You can always opt to directly use `require` and the `#default_bank` method in case the `#use_bank` convenience helper doesn't work for your particular bank service.
+
 ### Implementations
 
 The following is a list of Money.gem compatible currency exchange rate
@@ -227,6 +253,7 @@ implementations.
 - [nbrb_currency](https://github.com/slbug/nbrb_currency)
 - [money-open-exchange-rates](https://github.com/spk/money-open-exchange-rates)
 - [money-historical-bank](https://github.com/coutud/money-historical-bank)
+
 
 ## Ruby on Rails
 
