@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.1.1
+
+Added Money#use_bank and Money#bank_class helpers to setup bank used for exchange rates.
+
 ## 5.1.0
 
 - Engine now supports multiple ORMs and adds monetizable to each Model base module/class if present

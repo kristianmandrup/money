@@ -52,6 +52,16 @@ class Money
     #
     # @return [true,false]
     attr_accessor :assume_from_symbol
+
+    def use_bank name = :google_currency, bank = nil
+      require "money/bank/#{name}"
+      bank ||= bank_class(name)
+      default_bank = bank.new
+    end
+
+    def bank_class name = :google_currency
+      "Money::Bank::#{name.to_s.camelize}".contantize
+    end    
   end
 
   # Set the default bank for creating new +Money+ objects.
