@@ -1,0 +1,1 @@
+# spec to demonstrate fallback to alternative if one or more bank services fail

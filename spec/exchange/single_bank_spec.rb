@@ -1,0 +1,1 @@
+# spec to demonstrate simple wrapping of bank
