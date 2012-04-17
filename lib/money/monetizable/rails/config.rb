@@ -2,7 +2,7 @@ module Monetizable
 	module Rails
 		module OrmConfig
 			def self.active_record
-				Mongoid::Document.send(:include, Monetizable) if defined?(Mongoid::Document)
+				ActiveRecord::Base.send(:include, Monetizable) if defined?(ActiveRecord::Base)
 			end
 
 			def self.mongoid
