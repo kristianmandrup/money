@@ -26,11 +26,3 @@ require 'money/currency_loader'
 require 'money/currency'
 require 'money/money'
 require 'money/core_extensions'
-
-# FIXME: Consider usage of specific major version (Rails::VERSION::MAJOR == 3)
-if defined?(Rails)
-  require 'money/monetizable/monetize'
-  
-	require 'money/monetizable/engine' if defined?(::Rails::Engine)
-  require 'money/monetizable/railtie' if defined?(::Rails::Railtie) && !defined?(::Rails::Engine)
-end
