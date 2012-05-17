@@ -40,25 +40,25 @@ class Money
     #
     # @see #==
     def eql?(other_money)
-      if other_money.respond_to?(:to_money)
-        self == other_money
-      elsif other_money.kind_of? Numeric
+      if other_money.kind_of? Numeric
         self == Money.new(other_money)
+      elsif other_money.respond_to?(:to_money)
+        self == other_money
       else
         false
       end
     end
 
     def <=>(other_money)
-      if other_money.respond_to?(:to_money)
+      if other_money.kind_of? Numeric
+        cents <=> Money.new(other_money).cents
+      elsif other_money.respond_to?(:to_money)
         other_money = other_money.to_money
         if self.currency == other_money.currency
           cents <=> other_money.cents
         else
           cents <=> other_money.exchange_to(currency).cents
         end
-      elsif other_money.kind_of? Numeric
-        cents <=> Money.new(other).cents
       else
         raise ArgumentError, "Comparison of #{self.class} with #{other_money.inspect} failed"
       end
