@@ -40,7 +40,13 @@ class Money
     #
     # @see #==
     def eql?(other_money)
-      self == other_money
+      if other_money.respond_to?(:to_money)
+        self == other_money
+      elsif other_money.kind_of? Numeric
+        self == Money.new(other_money)
+      else
+        false
+      end
     end
 
     def <=>(other_money)
