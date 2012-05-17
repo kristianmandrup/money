@@ -51,6 +51,8 @@ class Money
         else
           cents <=> other_money.exchange_to(currency).cents
         end
+      elsif other_money.kind_of? Numeric
+        cents <=> Money.new(other).cents
       else
         raise ArgumentError, "Comparison of #{self.class} with #{other_money.inspect} failed"
       end
