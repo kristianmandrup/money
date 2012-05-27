@@ -251,8 +251,9 @@ class Money
       rules[:symbol] = "円"
       rules[:symbol_position] = :after
       rules[:symbol_after_without_space] = true
-    elsif currency.iso_code == 'SEK'
+    elsif currency.iso_code == "SEK"
       rules[:symbol_after_without_space] = true
+      rules[:no_cents_if_whole] = true
     end
     rules
   end
