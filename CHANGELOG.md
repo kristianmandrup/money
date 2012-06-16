@@ -9,20 +9,19 @@ Added the concepts of Exchanges. An Exchange is a service that can exchange one 
 - Money#Exchange namespace with two built-in exchanges
    - SingleBank
    - MultipleBanks
-- Specs done
-
-## 5.1.1
-
-Added Money#use_bank and Money#bank_class helpers to setup bank used for exchange rates.
+- Added Money#use_bank and Money#bank_class helpers to setup bank used for exchange rates.
+- Improved comparison operators in arithmetic to work with Numeric
 
 ## 5.1.0
-
-- Engine now supports multiple ORMs and adds monetizable to each Model base module/class if present
-- Railtie converted to Engine
-- merged with alup monetizable branch with Railtie and Monetizable
-- needs Rails specs to test integration for each ORM supported!
+- Switch to multi_json gem (GH-170)
+- Fix "warning: ambiguous first argument..." (GH-166)
+- Update dependencies to latest and greatest (GH-172)
+- TravisBot is now watching Pull Request!!! (GH-171)
+- Minor code cleaning
 
 ## 5.0.0
+- Minor bugfix - incorrect use of character range resulted in 
+  botched results for Money::Parsing#extract_cents (GH-162)
 - Money::Currency::TABLE removed. Use Money::Currency.register to add
   additional currencies (GH-143)
 - Fix rounding error in Numeric.to_money (GH-145)
@@ -38,6 +37,8 @@ Added Money#use_bank and Money#bank_class helpers to setup bank used for exchang
 - Added Money#positive? and Money#negative? methods (GH-157)
 - Fix format function output for custom currencies (GH-156)
 - Fix parsing of strings with 3 decimal digits (GH-158)
+- Updated development dependencies
+- Said goodbye to RubyForge
 
 ## 4.0.2
 

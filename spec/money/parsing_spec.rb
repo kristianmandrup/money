@@ -105,8 +105,8 @@ describe Money, "parsing" do
 
     context "custom currencies with 4 decimal places" do
       before :each do
-        Money::Currency.register(JSON.parse(bar, :symbolize_names => true))
-        Money::Currency.register(JSON.parse(eu4, :symbolize_names => true))
+        Money::Currency.register(MultiJson.load(bar, :symbolize_keys => true))
+        Money::Currency.register(MultiJson.load(eu4, :symbolize_keys => true))
       end
 
       # String#to_money(Currency) is equivalent to Money.parse(String, Currency)
@@ -289,6 +289,12 @@ describe Money, "parsing" do
 
       m = Money.from_numeric(1, "EUR")
       m.currency.should == Money::Currency.wrap("EUR")
+    end
+  end
+
+  describe ".extract_cents" do
+    it "correctly treats pipe marks '|' in input (regression test)" do
+      Money.extract_cents('100|0').should == Money.extract_cents('100!0')
     end
   end
 

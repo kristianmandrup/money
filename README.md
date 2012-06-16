@@ -1,6 +1,7 @@
 # RubyMoney - Money
 
 [![Build Status](http://travis-ci.org/RubyMoney/money.png)](http://travis-ci.org/RubyMoney/money)
+[![Dependency Status](https://gemnasium.com/RubyMoney/money.png)](https://gemnasium.com/RubyMoney/money)
 
 ## Contributing
 
@@ -28,8 +29,8 @@ This library aids one in handling money and different currencies.
 
 ### Resources
 
-- [Website](http://money.rubyforge.org)
-- [API Documentation](http://money.rubyforge.org)
+- [Website](http://rubymoney.github.com/money)
+- [API Documentation](http://rubydoc.info/gems/money/frames)
 - [Git Repository](http://github.com/RubyMoney/money)
 
 ### Note
@@ -72,9 +73,9 @@ Money.new(1000, "USD") * 5                     == Money.new(5000, "USD")
 
 # Assumptive Currencies
 Money.assume_from_symbol = true
-Money.new("$100") == Money.new(10000, "USD") 
-Money.new("€100") == Money.new(10000, "EUR") 
-Money.new("£100") == Money.new(10000, "GBP") 
+Money.parse("$100") == Money.new(10000, "USD")
+Money.parse("€100") == Money.new(10000, "EUR")
+Money.parse("£100") == Money.new(10000, "GBP")
 
 # Currency conversions
 some_code_to_setup_exchange_rates
@@ -252,7 +253,7 @@ implementations.
 - [nordea](https://github.com/k33l0r/nordea)
 - [nbrb_currency](https://github.com/slbug/nbrb_currency)
 - [money-open-exchange-rates](https://github.com/spk/money-open-exchange-rates)
-- [money-historical-bank](https://github.com/coutud/money-historical-bank)
+- [money-historical-bank](https://github.com/atwam/money-historical-bank)
 
 ## Exchanges
 
@@ -284,6 +285,9 @@ money.exchange = Money::Exchange::MultipleBanks.new primary_bank, secondary_bank
 ```
 
 ## Ruby on Rails
+
+To integrate money in a rails application use [money-rails](http://github.com/RubyMoney/money-rails)
+gem or follow the instructions below.
 
 Use the `composed_of` helper to let Active Record deal with embedding the money
 object in your models. The following example requires 2 columns:
