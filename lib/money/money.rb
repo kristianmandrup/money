@@ -60,7 +60,6 @@ class Money
     # @return [true,false]
     attr_accessor :assume_from_symbol
 
-<<<<<<< HEAD
     def use_bank name = :google_currency, bank = nil
       require "money/bank/#{name}"
       bank ||= bank_class(name)
@@ -70,7 +69,7 @@ class Money
     def bank_class name = :google_currency
       "Money::Bank::#{name.to_s.camelize}".contantize
     end    
-=======
+
     # Use this to enable infinite precision cents
     #
     # @return [true,false]
@@ -85,7 +84,12 @@ class Money
     #
     # @return [Integer]
     attr_accessor :conversion_precision
->>>>>>> RubyMoney/master
+
+    def to_cents cents
+      return cents.to_d(Money.conversion_precision) if cents.is_a?(Rational)      
+      return cents.to_d if cents.respond_to?(:to_d)
+      BigDecimal.new(cents.to_s)
+    end    
   end
 
   # Set the default bank for creating new +Money+ objects.
@@ -233,24 +237,11 @@ class Money
   #
   # @see Money.new_with_dollars
   #
-<<<<<<< HEAD
   def initialize(cents, currency = Money.default_currency, bank = Money.default_bank, exchange = Money.default_exchange)
-    @cents = cents.round.to_i
+    @cents = Money.to_cents(cents)
     @currency = Currency.wrap(currency)
     @bank = bank
     @exchange = exchange || Money::Exchange::SingleBank.new(bank)
-=======
-  def initialize(cents, currency = Money.default_currency, bank = Money.default_bank)
-    @cents    = if cents.is_a?(Rational)
-                  cents.to_d(self.class.conversion_precision)
-                elsif cents.respond_to?(:to_d)
-                  cents.to_d
-                else
-                  BigDecimal.new(cents.to_s)
-                end
-    @currency = Currency.wrap(currency)
-    @bank     = bank
->>>>>>> RubyMoney/master
   end
 
   # Returns the value of the money in dollars,
@@ -267,6 +258,10 @@ class Money
   #
   def dollars
     to_f
+  end
+
+  def with_currency
+    return "#{currency} #{to_s}"
   end
 
   # Return string representation of currency object

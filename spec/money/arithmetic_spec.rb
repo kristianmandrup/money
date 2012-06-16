@@ -133,9 +133,9 @@ describe Money do
     end
 
     it "can be used to compare with a Numeric money value" do
-      (Money.new(1_00) <=> 1).should == 0
+      (Money.new(1_00) <=> 1).should be_true
       (Money.new(1_00) <=> 0.99).should > 0
-      (Money.new(1_00) <=> 2.00).should < 0
+      (Money.new(1_00) <=> 3).should < 0
     end
 
     it "can be used to compare with an object that responds to #to_money" do

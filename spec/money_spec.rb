@@ -318,6 +318,13 @@ describe Money do
       money.to_money("EUR").should == Money.new(200_00, "EUR")
     end
   end
+  
+  describe "#with_currency" do
+    it "returns the currency and a the value in a nice way" do
+      money = Money.new(10_30, "CHF")
+      money.with_currency.should == "CHF 10.30"
+    end
+  end
 
   describe "#exchange_to" do
     it "exchanges the amount via its exchange bank" do

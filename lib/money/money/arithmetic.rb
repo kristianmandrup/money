@@ -39,9 +39,11 @@ class Money
     # @return [Money]
     #
     # @see #==
-    def eql?(other_money)
-      if other_money.kind_of? Numeric
-        self == Money.new(other_money)
+    def eql?(other_money)      
+      if other_money.respond_to?(:money)
+        self == other_money.money
+      elsif other_money.kind_of?(Numeric) || other_money.kind_of?(Float)
+        self == Money.new(other_money * 100)
       elsif other_money.respond_to?(:to_money)
         self == other_money
       else
@@ -51,7 +53,7 @@ class Money
 
     def <=>(other_money)
       if other_money.kind_of? Numeric
-        cents <=> Money.new(other_money).cents
+        cents <=> Money.new(other_money * 100).cents
       elsif other_money.respond_to?(:to_money)
         other_money = other_money.to_money
         if self.currency == other_money.currency
