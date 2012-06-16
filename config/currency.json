@@ -1590,13 +1590,13 @@
     "priority": 100,
     "iso_code": "SEK",
     "name": "Swedish Krona",
-    "symbol": "kr",
-    "subunit": "Öre",
+    "symbol": ":-",
+    "subunit": null,
     "subunit_to_unit": 100,
-    "symbol_first": true,
+    "symbol_first": false,
     "html_entity": "",
-    "decimal_mark": ".",
-    "thousands_separator": ",",
+    "decimal_mark": ",",
+    "thousands_separator": " ",
     "iso_numeric": "752"
   },
   "sgd": {
