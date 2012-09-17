@@ -1,7 +1,6 @@
 source :rubygems
 
 gem "rake"
-gem "activesupport", :require => false
-gem "railties", :require => false
+gem "json", :platform => :jruby
 
 gemspec

@@ -12,6 +12,13 @@ Added the concepts of Exchanges. An Exchange is a service that can exchange one 
 - Added Money#use_bank and Money#bank_class helpers to setup bank used for exchange rates.
 - Improved comparison operators in arithmetic to work with Numeric
 
+## master
+
+- Calling Bank::Base.instance doesn't make Bank::VariableExchange.instance
+  return Bank::Base.instance anymore (semaperepelitsa)
+- Update Turkmenistan manat from TMM to TMT currency (GH-181). [Thanks @Exoth]
+- Moved ZWD Zimbabwean dollars to currency_bc.json, also added there ZWL, ZWN, and ZWR Zimbabwean dollars (GH-184).
+
 ## 5.1.0
 - Switch to multi_json gem (GH-170)
 - Fix "warning: ambiguous first argument..." (GH-166)

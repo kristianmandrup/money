@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-require 'multi_json'
+require 'json'
 
 class Money
 
@@ -151,7 +151,7 @@ class Money
     #
     # @return [String]
     attr_reader :thousands_separator
-    alias :delimiter :thousands_separator 
+    alias :delimiter :thousands_separator
 
     # Should the currency symbol precede the amount, or should it come after?
     #
